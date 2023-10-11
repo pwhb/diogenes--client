@@ -5,7 +5,7 @@
 	import { Collections } from '$lib/consts/db';
 	import { CHANGE_USERNAME } from '$lib/consts/modals';
 	import { Colors } from '$lib/consts/tailwind';
-	import { closeModal } from '$lib/modal';
+	import { closeModal } from '$lib/helpers/modal';
 	import { toast } from '$lib/stores/toast';
 	import Input from '../common/Input.svelte';
 	import Modal from '../common/Modal.svelte';
@@ -28,7 +28,7 @@
 	}
 </script>
 
-<Modal title="Change username?" modal_id={CHANGE_USERNAME} {onSubmit}>
+<Modal title="Choose the username" modal_id={CHANGE_USERNAME} {onSubmit}>
 	<form class="text-center">
 		<Input name="username" label="username" bind:value={username} required disabled={isLoading} />
 		{#if errorMessage}

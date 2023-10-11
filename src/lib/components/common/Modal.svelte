@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { MODAL_ID, closeModal } from '$lib/modal';
+	import { MODAL_ID, closeModal } from '$lib/helpers/modal';
 	export let modal_id = MODAL_ID;
 	export let title = 'Hello!';
 
