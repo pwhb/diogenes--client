@@ -13,7 +13,7 @@
 <!-- <button class="btn" on:click={'my_modal_1.showModal()'}>open modal</button> -->
 <dialog id={modal_id} class="modal">
 	<div class="modal-box">
-		<h3 class="text-lg font-bold">{title}</h3>
+		<h3 class="text-lg font-bold capitalize">{title}</h3>
 		<slot />
 		<div class="modal-action">
 			<button class="btn btn-primary" on:click={onSubmit}>Confirm</button>

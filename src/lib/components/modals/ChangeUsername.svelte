@@ -6,33 +6,36 @@
 	import { CHANGE_USERNAME } from '$lib/consts/modals';
 	import { Colors } from '$lib/consts/tailwind';
 	import { closeModal } from '$lib/helpers/modal';
+	import { modalMessage } from '$lib/stores/modal';
 	import { toast } from '$lib/stores/toast';
 	import Input from '../common/Input.svelte';
 	import Modal from '../common/Modal.svelte';
 	let isLoading = false;
 	let username = $page.data.user.username;
-	let errorMessage = '';
+
 	async function onSubmit() {
-		errorMessage = '';
+		modalMessage.set('');
 		isLoading = true;
 		const data = await updateSelf(Collections.users, $page.data.token, 'update', {
 			username: username
 		});
-		if (data.error && data.error.code === 11000) {
-			errorMessage = 'Username is already taken.';
-		}
 		isLoading = false;
-		await invalidateAll();
-		closeModal(CHANGE_USERNAME);
-		toast('Username updated successfully.', 1200, Colors.success);
+		
+		if (data.error && data.error.code === 11000) {
+			modalMessage.set('Username is already taken.');
+		} else {
+			await invalidateAll();
+			closeModal(CHANGE_USERNAME);
+			toast('Username updated successfully.', 1200, Colors.success);
+		}
 	}
 </script>
 
-<Modal title="Choose the username" modal_id={CHANGE_USERNAME} {onSubmit}>
+<Modal title="choose your username" modal_id={CHANGE_USERNAME} {onSubmit}>
 	<form class="text-center">
 		<Input name="username" label="username" bind:value={username} required disabled={isLoading} />
-		{#if errorMessage}
-			<p class="text-red-500">{errorMessage}</p>
+		{#if $modalMessage}
+			<p class="text-red-500">{$modalMessage}</p>
 		{/if}
 	</form>
 </Modal>

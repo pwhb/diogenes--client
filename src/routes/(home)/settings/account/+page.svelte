@@ -1,7 +1,8 @@
 <script lang="ts">
 	import Wrapper from '$lib/components/layout/Wrapper.svelte';
+	import ChangePassword from '$lib/components/modals/ChangePassword.svelte';
 	import ChangeUsername from '$lib/components/modals/ChangeUsername.svelte';
-	import { CHANGE_USERNAME } from '$lib/consts/modals';
+	import { CHANGE_PASSWORD, CHANGE_USERNAME } from '$lib/consts/modals';
 	import { openModal } from '$lib/helpers/modal';
 	import Icon from '@iconify/svelte';
 
@@ -10,7 +11,7 @@
 	}
 
 	function onChangePassword() {
-		openModal(CHANGE_USERNAME);
+		openModal(CHANGE_PASSWORD);
 	}
 
 	async function onDeactivateAccount() {
@@ -20,6 +21,8 @@
 </script>
 
 <ChangeUsername />
+
+<ChangePassword />
 
 <form action="/logout" method="POST" id="logout-form" />
 
@@ -31,14 +34,14 @@
 			>
 		</li>
 		<li>
-			<button>
+			<button on:click={onChangePassword}>
 				<Icon icon="solar:lock-password-outline" width={24} />
 				Change password</button
 			>
 		</li>
 		<div class="my-0 divider" />
 		<li>
-			<button on:click={onDeactivateAccount}>
+			<button on:click={onDeactivateAccount} disabled>
 				<Icon icon="mingcute:user-remove-2-line" width={24} />
 				Deactivate Account</button
 			>

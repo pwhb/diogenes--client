@@ -7,7 +7,7 @@ export const load: LayoutServerLoad = async ({ locals, url }) =>
 {
     const config = await getOneByKey(Collections.configs, "frontend");
     return {
-        config: config
+        config: config.data
     };
 
 };

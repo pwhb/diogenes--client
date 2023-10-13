@@ -3,6 +3,8 @@
 	import Avatar from '$lib/components/common/Avatar.svelte';
 	import Wrapper from '$lib/components/layout/Wrapper.svelte';
 	import Icon from '@iconify/svelte';
+	const menus = $page.data.config.settings.menus;
+	console.log(menus);
 </script>
 
 <Wrapper title="Settings">
@@ -16,16 +18,18 @@
 			</a>
 		</li>
 		<div class="my-0 divider" />
-		<li>
-			<a href="/settings/account">
-				<Icon icon="solar:user-circle-outline" width={24} />Account
-			</a>
-		</li>
-		<li>
+		{#each menus as menu}
+			<li>
+				<a href={menu.href} class="capitalize">
+					<Icon icon={menu.icon} width={24} />{menu.name}
+				</a>
+			</li>
+		{/each}
+		<!-- <li>
 			<a href="/settings/themes">
 				<Icon icon="mdi:paint-outline" width={24} />Themes
 			</a>
-		</li>
+		</li> -->
 		<div class="my-0 divider" />
 		<form action="/logout" method="POST">
 			<li>

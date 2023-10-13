@@ -9,7 +9,7 @@
 	afterNavigate(({ from }) => {
 		previousPage = from?.url.pathname || previousPage;
 	});
-	const { nav } = $page.data.config.data;
+	const { nav } = $page.data.config;
 </script>
 
 <div class="navbar bg-base-100">

@@ -1,0 +1,71 @@
+<script lang="ts">
+	import { invalidateAll } from '$app/navigation';
+	import { page } from '$app/stores';
+	import { updateSelf } from '$lib/api/common';
+	import { Collections } from '$lib/consts/db';
+	import { CHANGE_PASSWORD } from '$lib/consts/modals';
+	import { Colors } from '$lib/consts/tailwind';
+	import { closeModal } from '$lib/helpers/modal';
+	import { modalMessage } from '$lib/stores/modal';
+	import { toast } from '$lib/stores/toast';
+	import Input from '../common/Input.svelte';
+	import Modal from '../common/Modal.svelte';
+	import PasswordInput from '../common/PasswordInput.svelte';
+	import Toggle from '../common/Toggle.svelte';
+	let isLoading = false;
+	let password = '';
+	let newPassword = '';
+	let showPassword = false;
+
+	async function onSubmit() {
+		modalMessage.set('');
+		isLoading = true;
+		const data = await updateSelf(Collections.users, $page.data.token, 'changePassword', {
+			password: password,
+			newPassword: newPassword
+		});
+		if (data.message) {
+			modalMessage.set(data.message);
+		}
+		isLoading = false;
+		if (data.data) {
+			await invalidateAll();
+			closeModal(CHANGE_PASSWORD);
+			toast('Password updated successfully.', 1200, Colors.success);
+		}
+	}
+</script>
+
+<Modal title="choose your new password" modal_id={CHANGE_PASSWORD} {onSubmit}>
+	<form class="text-center">
+		{#if showPassword}
+			<Input name="password" label="password" bind:value={password} required disabled={isLoading} />
+			<Input
+				name="newPassword"
+				label="New password"
+				bind:value={newPassword}
+				required
+				disabled={isLoading}
+			/>
+		{:else}
+			<PasswordInput
+				name="password"
+				label="password"
+				bind:value={password}
+				required
+				disabled={isLoading}
+			/>
+			<PasswordInput
+				name="newPassword"
+				label="New password"
+				bind:value={newPassword}
+				required
+				disabled={isLoading}
+			/>
+		{/if}
+		<Toggle label="Show Password" bind:checked={showPassword} />
+		{#if $modalMessage}
+			<p class="text-red-500">{$modalMessage}</p>
+		{/if}
+	</form>
+</Modal>
