@@ -5,7 +5,7 @@
 	export let isLoading = false;
 </script>
 
-<div class="join">
+<div class="rounded-full join">
 	<input class="input input-primary join-item" placeholder="Search" bind:value={search} />
 	<button class="rounded-r-full btn btn-primary join-item" on:click={onSearch} disabled={isLoading}>
 		{#if isLoading}
