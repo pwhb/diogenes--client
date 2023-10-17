@@ -39,7 +39,7 @@
 	}
 </script>
 
-{#if $page.url.pathname.split('/').length < 3}
+{#if $page.url.pathname.split('/').length < 3 && $page.data.user}
 	<div class="mx-auto max-w-xl btm-nav btm-nav-sm">
 		{#each routes as { href, icon, name, regex }}
 			<a {href} class={active === name ? 'active' : ''}>

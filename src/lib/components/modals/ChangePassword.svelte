@@ -3,7 +3,7 @@
 	import { page } from '$app/stores';
 	import { updateSelf } from '$lib/api/common';
 	import { Collections } from '$lib/consts/db';
-	import { CHANGE_PASSWORD } from '$lib/consts/modals';
+	import { ModalName } from '$lib/consts/modals';
 	import { Colors } from '$lib/consts/tailwind';
 	import { closeModal } from '$lib/helpers/modal';
 	import { modalMessage } from '$lib/stores/modal';
@@ -30,13 +30,13 @@
 		isLoading = false;
 		if (data.data) {
 			await invalidateAll();
-			closeModal(CHANGE_PASSWORD);
+			closeModal(ModalName.change_password);
 			toast('Password updated successfully.', 1200, Colors.success);
 		}
 	}
 </script>
 
-<Modal title="choose your new password" modal_id={CHANGE_PASSWORD} {onSubmit}>
+<Modal title="choose your new password" modal_id={ModalName.change_password} {onSubmit}>
 	<form class="text-center">
 		{#if showPassword}
 			<Input name="password" label="password" bind:value={password} required disabled={isLoading} />

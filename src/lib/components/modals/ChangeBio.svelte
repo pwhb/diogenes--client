@@ -11,13 +11,13 @@
 	import Input from '../common/Input.svelte';
 	import Modal from '../common/Modal.svelte';
 	let isLoading = false;
-	let username = $page.data.user.username;
+	let bio = $page.data.user.bio;
 
 	async function onSubmit() {
 		modalMessage.set('');
 		isLoading = true;
 		const data = await updateSelf(Collections.users, $page.data.token, 'update', {
-			username: username
+			bio: bio
 		});
 		isLoading = false;
 
@@ -25,20 +25,20 @@
 			modalMessage.set('Username is already taken.');
 		} else {
 			await invalidateAll();
-			closeModal(ModalName.change_username);
-			toast('Username updated successfully.', 1200, Colors.success);
+			closeModal(ModalName.change_bio);
+			toast('Bio updated successfully.', 1200, Colors.success);
 		}
 	}
 </script>
 
 <Modal
-	title="choose your username"
-	modal_id={ModalName.change_username}
+	title="Change your bio"
+	modal_id={ModalName.change_bio}
 	{onSubmit}
-	okToSubmit={username && username !== $page.data.user.username}
+	okToSubmit={bio && bio !== $page.data.user.bio}
 >
 	<form class="text-center">
-		<Input name="username" label="username" bind:value={username} required disabled={isLoading} />
+		<Input name="bio" label="bio" bind:value={bio} required disabled={isLoading} />
 		{#if $modalMessage}
 			<p class="text-red-500">{$modalMessage}</p>
 		{/if}

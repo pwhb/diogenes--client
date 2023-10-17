@@ -11,10 +11,4 @@ export const load: LayoutServerLoad = async ({ locals, url }) =>
     {
         throw redirect(302, '/auth/login');
     }
-    const data = await getOne(Collections.users, locals.user_id);
-    return {
-        user: data.data,
-        user_id: locals.user_id,
-        token: locals.token,
-    };
 };

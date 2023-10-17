@@ -4,7 +4,7 @@
 	let showPassword = false;
 </script>
 
-<div class="flex h-screen">
+<div class="flex h-[80vh]">
 	<div class="m-auto">
 		<form class="text-center" method="POST">
 			<img

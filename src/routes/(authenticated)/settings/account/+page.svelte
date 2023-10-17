@@ -29,11 +29,6 @@
 <Wrapper title="Account Settings">
 	<ul class="w-full menu bg-base-200 rounded-box">
 		<li>
-			<button on:click={onChangeUsername}>
-				<Icon icon="solar:user-id-outline" width={24} />Change username</button
-			>
-		</li>
-		<li>
 			<button on:click={onChangePassword}>
 				<Icon icon="solar:lock-password-outline" width={24} />
 				Change password</button
