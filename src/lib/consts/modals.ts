@@ -9,6 +9,8 @@ export enum ModalName
     change_user_info = "change_user_info",
     change_username = "change_username",
     change_password = "change_password",
-    change_bio = "change_bio"
+    change_bio = "change_bio",
+    change_avatar = "change_avatar",
+    change_wallpaper = "change_wallpaper"
 }
 

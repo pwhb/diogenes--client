@@ -1,5 +1,6 @@
-export enum Collections {
-	avatars = 'avatars',
+export enum Collections
+{
+	assets = 'assets',
 	configs = 'configs',
 	users = 'users',
 	roles = 'roles',

@@ -1,23 +1,25 @@
 <script>
 	import { page } from '$app/stores';
+	import { PUBLIC_BACKEND_URL } from '$env/static/public';
 	import Avatar from '$lib/components/common/Avatar.svelte';
 	import Modal from '$lib/components/common/Modal.svelte';
+	import ChangeAvatar from '$lib/components/modals/ChangeAvatar.svelte';
 	import ChangeBio from '$lib/components/modals/ChangeBio.svelte';
 	import ChangeUserInfo from '$lib/components/modals/ChangeBio.svelte';
 	import ChangeUsername from '$lib/components/modals/ChangeUsername.svelte';
+	import ChangeWallpaper from '$lib/components/modals/ChangeWallpaper.svelte';
 	import { ModalName } from '$lib/consts/modals';
 	import { Colors } from '$lib/consts/tailwind';
 	import { openModal } from '$lib/helpers/modal';
 	import { toast } from '$lib/stores/toast';
 	import Icon from '@iconify/svelte';
-	const bg = 'https://diogenes-pwhb.koyeb.app/api/v1/uploads/652253d41ead448aa0ed0cc0';
 
 	function onChangeWallpaper() {
-		console.log('changeWallpaper');
+		openModal(ModalName.change_wallpaper);
 	}
 
 	function onChangeAvatar() {
-		console.log('changeAvatar');
+		openModal(ModalName.change_avatar);
 	}
 
 	function onChangeUsername() {
@@ -36,10 +38,16 @@
 	}
 </script>
 
+<ChangeAvatar />
+<ChangeWallpaper />
 <ChangeUsername />
 <ChangeBio />
 <div class="w-full h-64 -z-12">
-	<img src={bg} alt="cover" class="object-none w-full h-64" />
+	<img
+		src={`${PUBLIC_BACKEND_URL}${$page.data.user.wallpaper || '/api/v1/uploads/652e539166ee7dc339724898'}`}
+		alt="cover"
+		class="object-none w-full h-64"
+	/>
 	{#if $page.data.user && $page.data.user._id === $page.data.data._id}
 		<div class="relative">
 			<button
