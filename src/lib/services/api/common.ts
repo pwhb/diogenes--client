@@ -22,6 +22,7 @@ export const getManyByToken = async (collectionName: string, token: string, key?
 	try
 	{
 		const url = `${PUBLIC_BACKEND_URL}/api/v1/${collectionName}${key || ""}${query || ""}`;
+
 		const res = await fetch(url, {
 			headers: {
 				Authorization: `Bearer ${token}`

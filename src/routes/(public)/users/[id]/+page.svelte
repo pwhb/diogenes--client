@@ -59,7 +59,7 @@
 <ChangeBio />
 <div class="w-full h-64 -z-12">
 	<img
-		src={$page.data.user.wallpaper || '/bg/undraw_stars_re_6je7.svg'}
+		src={$page.data.data.wallpaper || '/bg/undraw_stars_re_6je7.svg'}
 		alt="cover"
 		class="w-full h-64"
 	/>

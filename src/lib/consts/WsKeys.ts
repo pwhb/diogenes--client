@@ -1,7 +1,11 @@
 enum WsKeys
 {
+    join = "join",
     message = "message",
-    join = "join"
+    update = "update",
+    seen = "seen",
+    status = "status",
+    typing = "typing"
 }
 
 export default WsKeys;

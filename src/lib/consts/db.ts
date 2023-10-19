@@ -7,5 +7,6 @@ export enum Collections
 	routes = 'routes',
 	uploads = 'uploads',
 	followings = 'followings',
-	rooms = "rooms"
+	rooms = "rooms",
+	messages = "messages"
 }
