@@ -53,7 +53,7 @@
 				<div
 					class={selected === idx ? 'rounded-full bg-neutral-100' : 'rounded-full bg-neutral-500'}
 				>
-					<img src={`${PUBLIC_BACKEND_URL}${path}`} alt={name} />
+					<img src={path} alt={name} />
 				</div>
 			</button>
 		{/each}

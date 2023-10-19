@@ -9,13 +9,13 @@
 {#if avatar}
 	<div class="avatar">
 		<div class={`w-${width} rounded-full bg-neutral-50 p-2`}>
-			<img src={`${PUBLIC_BACKEND_URL}${avatar}`} alt={username} />
+			<img src={avatar} alt={username} />
 		</div>
 	</div>
 {:else}
 	<div class="avatar placeholder">
 		<div class={`w-${width} rounded-full bg-neutral-focus text-neutral-content`}>
-			<span class="text-2xl uppercase">{username[0]}</span>
+			<span class="text-{parseInt(width) > 12 ? '2xl' : 'lg'} uppercase">{username[0]}</span>
 		</div>
 	</div>
 {/if}

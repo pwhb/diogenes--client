@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { page } from '$app/stores';
 	import type { ActionData } from './$types';
 	export let form: ActionData;
 	let showPassword = false;
@@ -8,7 +9,7 @@
 	<div class="m-auto">
 		<form class="text-center" method="POST">
 			<img
-				src="https://diogenes-bun.onrender.com/api/v1/uploads/6525962d924620856dc035c3"
+				src={$page.data.config.nav.static_icon}
 				class="mx-auto w-12 rotate-[60deg]"
 				alt="diogenes"
 			/>

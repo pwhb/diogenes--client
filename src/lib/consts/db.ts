@@ -5,5 +5,7 @@ export enum Collections
 	users = 'users',
 	roles = 'roles',
 	routes = 'routes',
-	uploads = 'uploads'
+	uploads = 'uploads',
+	followings = 'followings',
+	rooms = "rooms"
 }

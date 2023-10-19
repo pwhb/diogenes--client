@@ -1,13 +1,14 @@
-<script>
+<script lang="ts">
+	import { invalidateAll } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { PUBLIC_BACKEND_URL } from '$env/static/public';
+	import { createOne, deleteOne } from '$lib/api/common';
 	import Avatar from '$lib/components/common/Avatar.svelte';
-	import Modal from '$lib/components/common/Modal.svelte';
 	import ChangeAvatar from '$lib/components/modals/ChangeAvatar.svelte';
 	import ChangeBio from '$lib/components/modals/ChangeBio.svelte';
-	import ChangeUserInfo from '$lib/components/modals/ChangeBio.svelte';
 	import ChangeUsername from '$lib/components/modals/ChangeUsername.svelte';
 	import ChangeWallpaper from '$lib/components/modals/ChangeWallpaper.svelte';
+	import { Collections } from '$lib/consts/db';
 	import { ModalName } from '$lib/consts/modals';
 	import { Colors } from '$lib/consts/tailwind';
 	import { openModal } from '$lib/helpers/modal';
@@ -30,12 +31,27 @@
 		openModal(ModalName.change_bio);
 	}
 
-	function onFollow() {}
+	async function onFollow() {
+		const data = await createOne(Collections.followings, $page.data.token, {
+			followed: $page.data.data._id
+		});
+		invalidateAll();
+	}
+
+	async function onUnfollow() {
+		const data = await createOne(`${Collections.followings}/unfollow`, $page.data.token, {
+			followed: $page.data.data._id
+		});
+		invalidateAll();
+	}
 
 	function copyUrl() {
 		navigator.clipboard.writeText($page.url.toString());
 		toast('URL copied to the clipboard', 1200, Colors.success);
 	}
+
+	const isAFollower = (followers: any[]) =>
+		followers.some((doc) => doc.follower === $page.data.user._id);
 </script>
 
 <ChangeAvatar />
@@ -44,9 +60,9 @@
 <ChangeBio />
 <div class="w-full h-64 -z-12">
 	<img
-		src={`${PUBLIC_BACKEND_URL}${$page.data.user.wallpaper || '/api/v1/uploads/652e539166ee7dc339724898'}`}
+		src={$page.data.user.wallpaper || '/bg/undraw_stars_re_6je7.svg'}
 		alt="cover"
-		class="object-none w-full h-64"
+		class="w-full h-64"
 	/>
 	{#if $page.data.user && $page.data.user._id === $page.data.data._id}
 		<div class="relative">
@@ -77,7 +93,10 @@
 				>
 			{/if}
 		</p>
-		<p>0 followings | 0 followers</p>
+		<p>
+			{$page.data.followings.total} following{$page.data.followings.total > 1 ? 's' : ''} | {$page
+				.data.followers.total} follower{$page.data.followers.total > 1 ? 's' : ''}
+		</p>
 		{#if $page.data.user && $page.data.user._id === $page.data.data._id}
 			<button class="p-5 w-2/3 text-center rounded-xl shadow-lg bg-base-200" on:click={onChangeBio}>
 				<p class="text-base-content">{$page.data.data.bio || '...'}</p>
@@ -90,7 +109,11 @@
 
 		{#if $page.data.user && $page.data.user._id !== $page.data.data._id}
 			<div class="join">
-				<button class="btn btn-primary btn-xs join-item" on:click={onFollow}>Follow</button>
+				{#if $page.data.followers.total && isAFollower($page.data.followers.data)}
+					<button class="btn btn-error btn-xs join-item" on:click={onUnfollow}>Unfollow</button>
+				{:else}
+					<button class="btn btn-primary btn-xs join-item" on:click={onFollow}>Follow</button>
+				{/if}
 				<button class="btn btn-secondary btn-xs join-item" on:click={copyUrl}>Share</button>
 			</div>
 		{:else}

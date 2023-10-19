@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { invalidateAll } from '$app/navigation';
 	import { page } from '$app/stores';
-	import { PUBLIC_BACKEND_URL } from '$env/static/public';
 	import { updateSelf } from '$lib/api/common';
 	import { Collections } from '$lib/consts/db';
 	import { ModalName } from '$lib/consts/modals';
@@ -10,6 +9,7 @@
 	import { modalMessage } from '$lib/stores/modal';
 	import { toast } from '$lib/stores/toast';
 	import Modal from '../common/Modal.svelte';
+
 	let isLoading = false;
 	let wallpaper = $page.data.user.wallpaper;
 
@@ -39,22 +39,20 @@
 	{onSubmit}
 	okToSubmit={wallpaper && wallpaper !== $page.data.user.wallpaper}
 >
-	<div class="grid grid-cols-4 gap-5">
+	<div class="grid grid-cols-2 gap-5">
 		{#each $page.data.wallpapers as { path, name }, idx}
 			<!-- <img src={`${PUBLIC_BACKEND_URL}${path}`} alt={name} class="rounded-full bg-base-300" /> -->
 
 			<button
-				class="wallpaper"
+				class={selected === idx
+					? 'bg-neutral-100 h-48 object-contain'
+					: 'bg-neutral-500 h-48 object-contain'}
 				on:click={() => {
 					selected = idx;
 					wallpaper = path;
 				}}
 			>
-				<div
-					class={selected === idx ? 'rounded-full bg-neutral-100' : 'rounded-full bg-neutral-500'}
-				>
-					<img src={`${PUBLIC_BACKEND_URL}${path}`} alt={name} />
-				</div>
+				<img src={path} alt={name} />
 			</button>
 		{/each}
 	</div>

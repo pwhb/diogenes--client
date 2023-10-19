@@ -4,7 +4,6 @@
 	import Wrapper from '$lib/components/layout/Wrapper.svelte';
 	import Icon from '@iconify/svelte';
 	const menus = $page.data.config.settings.menus;
-	console.log(menus);
 </script>
 
 <Wrapper title="Settings">

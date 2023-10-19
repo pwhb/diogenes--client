@@ -17,12 +17,53 @@ export const getMany = async (collectionName: string, query?: string) =>
 
 };
 
+export const getManyByToken = async (collectionName: string, token: string, key?: string, query?: string) =>
+{
+	try
+	{
+		const url = `${PUBLIC_BACKEND_URL}/api/v1/${collectionName}${key || ""}${query || ""}`;
+		const res = await fetch(url, {
+			headers: {
+				Authorization: `Bearer ${token}`
+			}
+		});
+		const data = await res.json();
+		return data;
+	} catch (e)
+	{
+		console.error(e);
+		return null;
+	}
+
+};
+
 export const getOne = async (collectionName: string, id: string) =>
 {
 	try
 	{
 		const url = `${PUBLIC_BACKEND_URL}/api/v1/${collectionName}/${id}`;
 		const res = await fetch(url);
+		const data = await res.json();
+		return data;
+	} catch (e)
+	{
+		console.error(e);
+		return null;
+	}
+
+};
+
+
+export const getOneByToken = async (collectionName: string, token: string, id: string, key?: string) =>
+{
+	try
+	{
+		const url = `${PUBLIC_BACKEND_URL}/api/v1/${collectionName}/${id}${key}`;
+		const res = await fetch(url, {
+			headers: {
+				Authorization: `Bearer ${token}`
+			}
+		});
 		const data = await res.json();
 		return data;
 	} catch (e)

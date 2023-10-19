@@ -44,7 +44,9 @@ export default {
     'w-16',
     'w-20',
     'w-24',
-    'alert-success'
+    'alert-success',
+    'text-2xl',
+    'text-lg'
   ]
 }
 

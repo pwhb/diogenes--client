@@ -8,6 +8,7 @@
 	import { closeModal } from '$lib/helpers/modal';
 	import { modalMessage } from '$lib/stores/modal';
 	import { toast } from '$lib/stores/toast';
+	import { onMount } from 'svelte';
 	import Input from '../common/Input.svelte';
 	import Modal from '../common/Modal.svelte';
 	let isLoading = false;

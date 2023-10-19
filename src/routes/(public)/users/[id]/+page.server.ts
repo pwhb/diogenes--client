@@ -7,17 +7,25 @@ export const load: PageServerLoad = async ({ params }) =>
 {
     try
     {
-        const data = await getOne(Collections.users, params.id);
-        const avatars = await getMany(Collections.assets, "?limit=100&category=avatar&active=true");
-        const wallpapers = await getMany(Collections.assets, "?limit=100&category=wallpaper&active=true");
-        if (data)
-        {
-            return {
-                data: data.data,
-                avatars: avatars.data,
-                wallpapers: wallpapers.data
-            };
-        }
+        const [data, avatars, wallpapers, followers, followings] = await Promise.all([
+            await getOne(Collections.users, params.id),
+            await getMany(Collections.assets, "?limit=100&category=avatar&active=true"),
+            await getMany(Collections.assets, "?limit=100&category=wallpaper&active=true"),
+            await getMany(Collections.followings, `?limit=1000&followed=${params.id}`),
+            await getMany(Collections.followings, `?limit=1000&follower=${params.id}`)
+        ]);
+
+
+
+        return {
+            data: data.data,
+            avatars: avatars.data,
+            wallpapers: wallpapers.data,
+            followers: followers,
+            followings: followings
+            // wallpapers: wallpapers.data
+        };
+
 
         throw error(404, 'Not found');
 
