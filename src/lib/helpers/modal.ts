@@ -1,11 +1,11 @@
-import { modalMessage, modalName } from "$lib/stores/modal";
+import { modalMessageStore } from "$lib/services/stores/modal";
 
 export const MODAL_ID = "diogenes_modal";
 
 export function openModal(modalId: string = MODAL_ID)
 {
 
-    modalMessage.set('');
+    modalMessageStore.set('');
     let el: any = document.getElementById(modalId);
     el.showModal();
 }

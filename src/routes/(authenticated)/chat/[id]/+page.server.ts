@@ -1,6 +1,6 @@
 import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
-import { getMany, getOne, getOneByToken } from '$lib/api/common';
+import { getMany, getOne, getOneByToken } from '$lib/services/api/common';
 import { Collections } from '$lib/consts/db';
 
 export const load: PageServerLoad = async ({ locals, params }) =>
@@ -8,7 +8,9 @@ export const load: PageServerLoad = async ({ locals, params }) =>
     try
     {
         const room = await getOneByToken(Collections.rooms, locals.token, params.id, "/getbyToken");
-        return room;
+        return {
+            room: room.data
+        };
 
     } catch (e)
     {

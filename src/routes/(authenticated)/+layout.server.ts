@@ -1,6 +1,6 @@
 import { redirect } from '@sveltejs/kit';
 import type { LayoutServerLoad } from "./$types";
-import { getOne } from "$lib/api/common";
+import { getOne } from "$lib/services/api/common";
 import { Collections } from "$lib/consts/db";
 
 

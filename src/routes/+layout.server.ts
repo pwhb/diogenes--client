@@ -1,5 +1,5 @@
 import type { LayoutServerLoad } from "./$types";
-import { getOne, getOneByKey } from "$lib/api/common";
+import { getOne, getOneByKey } from "$lib/services/api/common";
 import { Collections } from "$lib/consts/db";
 
 

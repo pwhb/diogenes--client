@@ -1,6 +1,5 @@
 <script lang="ts">
-	import { PUBLIC_BACKEND_URL } from '$env/static/public';
-
+	
 	export let avatar: string | '';
 	export let username: string;
 	export let width = '8';

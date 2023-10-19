@@ -1,9 +1,9 @@
 import { error } from '@sveltejs/kit';
-import type { PageServerLoad } from './$types';
-import { getMany, getManyByToken, getOne } from '$lib/api/common';
+import { getManyByToken } from '$lib/services/api/common';
 import { Collections } from '$lib/consts/db';
+import type { LayoutServerLoad } from "../$types";
 
-export const load: PageServerLoad = async ({ locals }) =>
+export const load: LayoutServerLoad = async ({ locals }) =>
 {
     try
     {

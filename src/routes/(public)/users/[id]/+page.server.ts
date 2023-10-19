@@ -1,6 +1,6 @@
 import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
-import { getMany, getOne } from '$lib/api/common';
+import { getMany, getOne } from '$lib/services/api/common';
 import { Collections } from '$lib/consts/db';
 
 export const load: PageServerLoad = async ({ params }) =>

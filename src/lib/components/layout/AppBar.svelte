@@ -3,7 +3,7 @@
 	import Icon from '@iconify/svelte';
 	import { goto, afterNavigate } from '$app/navigation';
 	import { base } from '$app/paths';
-	
+
 	let previousPage: string = `${base}/settings`;
 
 	afterNavigate(({ from }) => {
@@ -12,9 +12,6 @@
 	const { nav } = $page.data.config;
 
 	const chatRegex = new RegExp('^/chat/([^/]+)$');
-
-	console.log(nav);
-	
 </script>
 
 {#if !chatRegex.test($page.url.pathname)}

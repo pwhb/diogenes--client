@@ -1,8 +1,7 @@
 <script lang="ts">
 	import { invalidateAll } from '$app/navigation';
 	import { page } from '$app/stores';
-	import { PUBLIC_BACKEND_URL } from '$env/static/public';
-	import { createOne, deleteOne } from '$lib/api/common';
+	import { createOne } from '$lib/services/api/common';
 	import Avatar from '$lib/components/common/Avatar.svelte';
 	import ChangeAvatar from '$lib/components/modals/ChangeAvatar.svelte';
 	import ChangeBio from '$lib/components/modals/ChangeBio.svelte';
@@ -12,7 +11,7 @@
 	import { ModalName } from '$lib/consts/modals';
 	import { Colors } from '$lib/consts/tailwind';
 	import { openModal } from '$lib/helpers/modal';
-	import { toast } from '$lib/stores/toast';
+	import { toast } from '$lib/services/stores/toast';
 	import Icon from '@iconify/svelte';
 
 	function onChangeWallpaper() {
@@ -110,6 +109,7 @@
 		{#if $page.data.user && $page.data.user._id !== $page.data.data._id}
 			<div class="join">
 				{#if $page.data.followers.total && isAFollower($page.data.followers.data)}
+					<!-- <a class="btn btn-success btn-xs join-item" href={`/chat/`}>Message</a> -->
 					<button class="btn btn-error btn-xs join-item" on:click={onUnfollow}>Unfollow</button>
 				{:else}
 					<button class="btn btn-primary btn-xs join-item" on:click={onFollow}>Follow</button>

@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { showToast, text, type } from '$lib/stores/toast';
+	import { showToastStore, toastTextStore, toastTypeStore } from '$lib/services/stores/toast';
 </script>
 
-{#if $showToast}
+{#if $showToastStore}
 	<div class="toast toast-center">
-		<div class={`alert alert-${$type}`}>
-			<span>{$text}</span>
+		<div class={`alert alermodalMessageTypeStoret-${$toastTypeStore}`}>
+			<span>{$toastTextStore}</span>
 		</div>
 	</div>
 {/if}

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { getMany } from '$lib/api/common';
+	import { getMany } from '$lib/services/api/common';
 	import Avatar from '$lib/components/common/Avatar.svelte';
 	import Search from '$lib/components/common/Search.svelte';
 	import Wrapper from '$lib/components/layout/Wrapper.svelte';
